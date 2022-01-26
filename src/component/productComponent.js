@@ -31,6 +31,13 @@ class ProductComponent extends Component {
         };
     }
 
+    calculateFinalPrice = (variantPrice = 0) => {
+        console.log(this.state);
+        // const {product, finalPrice} = this.state;
+        // this.setState({...product, finalPrice: 125});
+        // todo: get variant prices and add into final total.
+    }
+
     render() {
         const {product} = this.state;
         return (
@@ -39,7 +46,7 @@ class ProductComponent extends Component {
                     <Col className="align-items-center">
                         <Image fluid className="align-items-center" alt="product-image" src={ProductImage}/>
                     </Col>
-                    <Col><ProductDetailsComponent product={product}/></Col>
+                    <Col><ProductDetailsComponent product={product} priceCalculator={this.calculateFinalPrice}/></Col>
                 </Row>
                 <hr/>
                 <Row>

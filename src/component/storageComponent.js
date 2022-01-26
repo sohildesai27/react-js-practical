@@ -5,6 +5,7 @@ class StorageComponent extends Component {
     constructor(props) {
         super(props);
         this.storage = props.storage;
+        this.default = props.default;
     }
 
     render() {
@@ -18,11 +19,19 @@ class StorageComponent extends Component {
 
                     <Dropdown.Menu>
                         {this.storage.map(row => {
-                            if (row.price) {
-                                return (<Dropdown.Item key={row.id}>{row.name}<p>+&#8377;{row.price}</p>
-                                </Dropdown.Item>);
+                            if (row.id === this.default.id) {
+                                return (
+                                    <Dropdown.Item active onClick={() => this.priceCalculator()} key={row.id}>{row.name}
+                                        if (row.price) {
+                                            <p>+&#8377;{row.price}</p>
+                                        }
+                                    </Dropdown.Item>);
                             }
-                            return (<Dropdown.Item key={row.id}>{row.name}</Dropdown.Item>);
+                            return (<Dropdown.Item onClick={() => this.priceCalculator()} key={row.id}>{row.name}
+                                if (row.price) {
+                                    <p>+&#8377;{row.price}</p>
+                                }
+                            </Dropdown.Item>);
                         })}
                     </Dropdown.Menu>
                 </Dropdown>

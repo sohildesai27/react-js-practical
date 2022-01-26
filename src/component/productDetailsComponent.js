@@ -8,6 +8,17 @@ class ProductDetailsComponent extends Component {
     constructor(props) {
         super(props);
         this.product = props.product;
+        this.selectedProcessor = {
+            id: 1,
+            name: 'Apple M1 Pro with 10-core CPU, 16-core GPU, 16-core Neural Engine',
+            price: 0
+        };
+        this.selectedMemory = {id: 1, name: '16GB unified memory', price: 0};
+        this.selectedStorage = {id: 1, name: '512GB SSD storage', price: 0};
+    }
+
+    priceCalculator = () => {
+        this.props.priceCalculator(this.selectedProcessor.price + this.selectedStorage + this.selectedMemory);
     }
 
     render() {
@@ -26,11 +37,17 @@ class ProductDetailsComponent extends Component {
                 </Col>
                 <hr/>
                 <Col>
-                    <ProcessorComponent processors={this.product.processors}/>
+                    <ProcessorComponent processors={this.product.processors}
+                                        priceCalculator={this.priceCalculator}
+                                        default={this.selectedProcessor}/>
                     <br/>
-                    <MemoryComponent memory={this.product.memory}/>
+                    <MemoryComponent memory={this.product.memory}
+                                     priceCalculator={this.priceCalculator}
+                                     default={this.selectedMemory}/>
                     <br/>
-                    <StorageComponent  storage={this.product.storage}/>
+                    <StorageComponent storage={this.product.storage}
+                                      priceCalculator={this.priceCalculator}
+                                      default={this.selectedStorage}/>
                 </Col>
             </row>
         );
