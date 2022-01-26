@@ -1,7 +1,12 @@
 import React, {Component} from "react";
-import {Col, Row, Dropdown} from "react-bootstrap";
+import {Col, Dropdown} from "react-bootstrap";
 
 class StorageComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.storage = props.storage;
+    }
+
     render() {
         return (
             <Col>
@@ -12,25 +17,13 @@ class StorageComponent extends Component {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick="#/action-1" active>
-                            512GB SSD storage
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            1TB SSD storage
-                            <p>+&#8377;20000.00</p>
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            2TB SSD storage
-                            <p>+&#8377;60000.00</p>
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            4TB SSD storage
-                            <p>+&#8377;120000.00</p>
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            8TB SSD storage
-                            <p>+&#8377;240000.00</p>
-                        </Dropdown.Item>
+                        {this.storage.map(row => {
+                            if (row.price) {
+                                return (<Dropdown.Item key={row.id}>{row.name}<p>+&#8377;{row.price}</p>
+                                </Dropdown.Item>);
+                            }
+                            return (<Dropdown.Item key={row.id}>{row.name}</Dropdown.Item>);
+                        })}
                     </Dropdown.Menu>
                 </Dropdown>
             </Col>

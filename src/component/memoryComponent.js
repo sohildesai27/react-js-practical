@@ -1,7 +1,12 @@
 import React, {Component} from "react";
-import {Col, Row, Dropdown} from "react-bootstrap";
+import {Col, Dropdown} from "react-bootstrap";
 
 class MemoryComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.memory = props.memory;
+    }
+
     render() {
         return (
             <Col>
@@ -12,13 +17,13 @@ class MemoryComponent extends Component {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick="#/action-1" active>
-                            16GB unified memory
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            32GB unified memory
-                            <p>+&#8377;40000.00</p>
-                        </Dropdown.Item>
+                        {this.memory.map(row => {
+                            if (row.price) {
+                                return (<Dropdown.Item key={row.id}>{row.name}<p>+&#8377;{row.price}</p>
+                                </Dropdown.Item>);
+                            }
+                            return (<Dropdown.Item key={row.id}>{row.name}</Dropdown.Item>);
+                        })}
                     </Dropdown.Menu>
                 </Dropdown>
             </Col>

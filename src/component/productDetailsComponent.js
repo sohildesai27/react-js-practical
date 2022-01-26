@@ -5,6 +5,11 @@ import MemoryComponent from "./memoryComponent";
 import StorageComponent from "./storageComponent";
 
 class ProductDetailsComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.product = props.product;
+    }
+
     render() {
         return (
             <row>
@@ -21,11 +26,11 @@ class ProductDetailsComponent extends Component {
                 </Col>
                 <hr/>
                 <Col>
-                    <ProcessorComponent/>
+                    <ProcessorComponent processors={this.product.processors}/>
                     <br/>
-                    <MemoryComponent/>
+                    <MemoryComponent memory={this.product.memory}/>
                     <br/>
-                    <StorageComponent/>
+                    <StorageComponent  storage={this.product.storage}/>
                 </Col>
             </row>
         );
